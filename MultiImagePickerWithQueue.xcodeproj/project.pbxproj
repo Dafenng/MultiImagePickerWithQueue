@@ -18,6 +18,16 @@
 		D8C309451724F1880057B393 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C309441724F1880057B393 /* Default-568h@2x.png */; };
 		D8C309481724F1880057B393 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C309471724F1880057B393 /* ViewController.m */; };
 		D8C3094B1724F1880057B393 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C309491724F1880057B393 /* ViewController.xib */; };
+		D8C309601724F1980057B393 /* multiimage_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C309521724F1980057B393 /* multiimage_delete.png */; };
+		D8C309611724F1980057B393 /* multiimage_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D8C309531724F1980057B393 /* multiimage_delete@2x.png */; };
+		D8C309621724F1980057B393 /* NEAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C309551724F1980057B393 /* NEAlbumPickerController.m */; };
+		D8C309631724F1980057B393 /* NEAlbumPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C309561724F1980057B393 /* NEAlbumPickerController.xib */; };
+		D8C309641724F1980057B393 /* NEAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C309581724F1980057B393 /* NEAsset.m */; };
+		D8C309651724F1980057B393 /* NEAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C3095A1724F1980057B393 /* NEAssetCell.m */; };
+		D8C309661724F1980057B393 /* NEAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C3095C1724F1980057B393 /* NEAssetPickerController.m */; };
+		D8C309671724F1980057B393 /* NEAssetPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C3095D1724F1980057B393 /* NEAssetPickerController.xib */; };
+		D8C309681724F1980057B393 /* NEMultiImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C3095F1724F1980057B393 /* NEMultiImagePickerController.m */; };
+		D8C3096A172510D50057B393 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C30969172510D50057B393 /* AssetsLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +47,21 @@
 		D8C309461724F1880057B393 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D8C309471724F1880057B393 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D8C3094A1724F1880057B393 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		D8C309521724F1980057B393 /* multiimage_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multiimage_delete.png; sourceTree = "<group>"; };
+		D8C309531724F1980057B393 /* multiimage_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "multiimage_delete@2x.png"; sourceTree = "<group>"; };
+		D8C309541724F1980057B393 /* NEAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEAlbumPickerController.h; sourceTree = "<group>"; };
+		D8C309551724F1980057B393 /* NEAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEAlbumPickerController.m; sourceTree = "<group>"; };
+		D8C309561724F1980057B393 /* NEAlbumPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NEAlbumPickerController.xib; sourceTree = "<group>"; };
+		D8C309571724F1980057B393 /* NEAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEAsset.h; sourceTree = "<group>"; };
+		D8C309581724F1980057B393 /* NEAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEAsset.m; sourceTree = "<group>"; };
+		D8C309591724F1980057B393 /* NEAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEAssetCell.h; sourceTree = "<group>"; };
+		D8C3095A1724F1980057B393 /* NEAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEAssetCell.m; sourceTree = "<group>"; };
+		D8C3095B1724F1980057B393 /* NEAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEAssetPickerController.h; sourceTree = "<group>"; };
+		D8C3095C1724F1980057B393 /* NEAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEAssetPickerController.m; sourceTree = "<group>"; };
+		D8C3095D1724F1980057B393 /* NEAssetPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NEAssetPickerController.xib; sourceTree = "<group>"; };
+		D8C3095E1724F1980057B393 /* NEMultiImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEMultiImagePickerController.h; sourceTree = "<group>"; };
+		D8C3095F1724F1980057B393 /* NEMultiImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEMultiImagePickerController.m; sourceTree = "<group>"; };
+		D8C30969172510D50057B393 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C3096A172510D50057B393 /* AssetsLibrary.framework in Frameworks */,
 				D8C3092F1724F1880057B393 /* UIKit.framework in Frameworks */,
 				D8C309311724F1880057B393 /* Foundation.framework in Frameworks */,
 				D8C309331724F1880057B393 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +99,7 @@
 		D8C3092D1724F1880057B393 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D8C30969172510D50057B393 /* AssetsLibrary.framework */,
 				D8C3092E1724F1880057B393 /* UIKit.framework */,
 				D8C309301724F1880057B393 /* Foundation.framework */,
 				D8C309321724F1880057B393 /* CoreGraphics.framework */,
@@ -83,6 +110,7 @@
 		D8C309341724F1880057B393 /* MultiImagePickerWithQueue */ = {
 			isa = PBXGroup;
 			children = (
+				D8C309511724F1980057B393 /* MultiImagePicker */,
 				D8C3093D1724F1880057B393 /* AppDelegate.h */,
 				D8C3093E1724F1880057B393 /* AppDelegate.m */,
 				D8C309461724F1880057B393 /* ViewController.h */,
@@ -105,6 +133,27 @@
 				D8C309441724F1880057B393 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D8C309511724F1980057B393 /* MultiImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				D8C309521724F1980057B393 /* multiimage_delete.png */,
+				D8C309531724F1980057B393 /* multiimage_delete@2x.png */,
+				D8C309541724F1980057B393 /* NEAlbumPickerController.h */,
+				D8C309551724F1980057B393 /* NEAlbumPickerController.m */,
+				D8C309561724F1980057B393 /* NEAlbumPickerController.xib */,
+				D8C309571724F1980057B393 /* NEAsset.h */,
+				D8C309581724F1980057B393 /* NEAsset.m */,
+				D8C309591724F1980057B393 /* NEAssetCell.h */,
+				D8C3095A1724F1980057B393 /* NEAssetCell.m */,
+				D8C3095B1724F1980057B393 /* NEAssetPickerController.h */,
+				D8C3095C1724F1980057B393 /* NEAssetPickerController.m */,
+				D8C3095D1724F1980057B393 /* NEAssetPickerController.xib */,
+				D8C3095E1724F1980057B393 /* NEMultiImagePickerController.h */,
+				D8C3095F1724F1980057B393 /* NEMultiImagePickerController.m */,
+			);
+			path = MultiImagePicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +212,10 @@
 				D8C309431724F1880057B393 /* Default@2x.png in Resources */,
 				D8C309451724F1880057B393 /* Default-568h@2x.png in Resources */,
 				D8C3094B1724F1880057B393 /* ViewController.xib in Resources */,
+				D8C309601724F1980057B393 /* multiimage_delete.png in Resources */,
+				D8C309611724F1980057B393 /* multiimage_delete@2x.png in Resources */,
+				D8C309631724F1980057B393 /* NEAlbumPickerController.xib in Resources */,
+				D8C309671724F1980057B393 /* NEAssetPickerController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +229,11 @@
 				D8C3093B1724F1880057B393 /* main.m in Sources */,
 				D8C3093F1724F1880057B393 /* AppDelegate.m in Sources */,
 				D8C309481724F1880057B393 /* ViewController.m in Sources */,
+				D8C309621724F1980057B393 /* NEAlbumPickerController.m in Sources */,
+				D8C309641724F1980057B393 /* NEAsset.m in Sources */,
+				D8C309651724F1980057B393 /* NEAssetCell.m in Sources */,
+				D8C309661724F1980057B393 /* NEAssetPickerController.m in Sources */,
+				D8C309681724F1980057B393 /* NEMultiImagePickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +319,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MultiImagePickerWithQueue/MultiImagePickerWithQueue-Prefix.pch";
 				INFOPLIST_FILE = "MultiImagePickerWithQueue/MultiImagePickerWithQueue-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -272,6 +331,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MultiImagePickerWithQueue/MultiImagePickerWithQueue-Prefix.pch";
 				INFOPLIST_FILE = "MultiImagePickerWithQueue/MultiImagePickerWithQueue-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
