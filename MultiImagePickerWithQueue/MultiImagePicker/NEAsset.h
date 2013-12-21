@@ -7,20 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+#import "ALAsset+Equal.h"
 
 
-@interface NEAsset : UIView {
-	ALAsset *asset;
-	//UIImageView *overlayView;
-	BOOL selected;
-	id parent;
-}
+@interface NEAsset : UIView
 
 @property (nonatomic, retain) ALAsset *asset;
 @property (nonatomic, assign) id parent;
+@property (nonatomic, assign) BOOL selected;
 
--(id)initWithAsset:(ALAsset*)_asset;
--(BOOL)selected;
+-(id)initWithAsset:(ALAsset*)asset;
+-(BOOL)isEqual:(id)obj;
 
 @end

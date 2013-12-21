@@ -8,11 +8,15 @@
 
 #import "NEAsset.h"
 #import "NEAssetPickerController.h"
+#import <QuartzCore/QuartzCore.h>
+
+@interface NEAsset ()
+
+@property (nonatomic, retain) UIImageView *overlayView;
+
+@end
 
 @implementation NEAsset
-
-@synthesize asset;
-@synthesize parent;
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
@@ -21,11 +25,11 @@
     return self;
 }
 
--(id)initWithAsset:(ALAsset*)_asset {
+-(id)initWithAsset:(ALAsset*)asset {
 	
 	if (self = [super initWithFrame:CGRectMake(0, 0, 0, 0)]) {
 		
-		self.asset = _asset;
+		self.asset = asset;
 		
 		CGRect viewFrames = CGRectMake(0, 0, 75, 75);
 		
@@ -35,10 +39,15 @@
 		[self addSubview:assetImageView];
 		[assetImageView release];
 		
-//		overlayView = [[UIImageView alloc] initWithFrame:viewFrames];
+		UIImageView *overlay = [[UIImageView alloc] initWithFrame:viewFrames];
 //		[overlayView setImage:[UIImage imageNamed:@"Overlay.png"]];
-//		[overlayView setHidden:YES];
-//		[self addSubview:overlayView];
+        overlay.layer.borderColor = [UIColor blueColor].CGColor;
+        overlay.layer.borderWidth = 5.0f;
+        [overlay setHidden:!self.selected];
+        self.overlayView = overlay;
+        [overlay release];
+        
+		[self addSubview:self.overlayView];
     }
     
 	return self;	
@@ -48,31 +57,34 @@
     
 	//overlayView.hidden = !overlayView.hidden;
     [(NEAssetPickerController *)self.parent addAsset:self];
-    selected = YES;
+    self.selected = YES;
 }
 
 -(void)toggleDeselection {
     
 	//overlayView.hidden = !overlayView.hidden;
     [(NEAssetPickerController *)self.parent removeAsset:self];
-    selected = NO;
+    self.selected = NO;
 }
 
--(BOOL)selected {
-	
-	return selected;
+-(void)setSelected:(BOOL)selected
+{
+    _selected = selected;
+    [self.overlayView setHidden:!_selected];
 }
 
-//-(void)setSelected:(BOOL)_selected {
-//    
-//	//[overlayView setHidden:!_selected];
-//    selected = _selected;
-//}
+- (BOOL)isEqual:(id)obj
+{
+    if(![obj isKindOfClass:[NEAsset class]])
+        return NO;
+    
+    return [self.asset isEqual:((NEAsset *)obj).asset];
+}
 
 - (void)dealloc 
 {    
-    self.asset = nil;
-	//[overlayView release];
+    [_asset release];
+    [_overlayView release];
     [super dealloc];
 }
 

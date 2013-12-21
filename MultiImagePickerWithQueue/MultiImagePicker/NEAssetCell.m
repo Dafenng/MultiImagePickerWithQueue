@@ -11,45 +11,44 @@
 
 @implementation NEAssetCell
 
-@synthesize rowAssets;
-
--(id)initWithAssets:(NSArray*)_assets reuseIdentifier:(NSString*)_identifier {
-    
-	if(self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_identifier]) {
-        
-		self.rowAssets = _assets;
-	}
+-(void)setAssets:(NSArray*)assets {
 	
-	return self;
-}
-
--(void)setAssets:(NSArray*)_assets {
-	
-	for(UIView *view in [self subviews]) 
+	for(UIView *view in [self.contentView subviews])
     {		
 		[view removeFromSuperview];
 	}
 	
-	self.rowAssets = _assets;
-}
-
--(void)layoutSubviews {
+	self.rowAssets = assets;
     
-	CGRect frame = CGRectMake(4, 2, 75, 75);
+    CGRect frame = CGRectMake(4, 2, 75, 75);
 	
 	for(NEAsset *asset in self.rowAssets) {
 		
 		[asset setFrame:frame];
 		[asset addGestureRecognizer:[[[UITapGestureRecognizer alloc] initWithTarget:asset action:@selector(toggleSelection)] autorelease]];
-		[self addSubview:asset];
+		[self.contentView addSubview:asset];
 		
 		frame.origin.x = frame.origin.x + frame.size.width + 4;
 	}
 }
 
+//-(void)layoutSubviews {
+//    
+//	CGRect frame = CGRectMake(4, 2, 75, 75);
+//	
+//	for(NEAsset *asset in self.rowAssets) {
+//		
+//		[asset setFrame:frame];
+//		[asset addGestureRecognizer:[[[UITapGestureRecognizer alloc] initWithTarget:asset action:@selector(toggleSelection)] autorelease]];
+//		[self.contentView addSubview:asset];
+//		
+//		frame.origin.x = frame.origin.x + frame.size.width + 4;
+//	}
+//}
+
 -(void)dealloc 
 {
-	[rowAssets release];
+	[_rowAssets release];
     
 	[super dealloc];
 }

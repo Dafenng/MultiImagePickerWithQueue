@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB7B6EE2181E68DB0026E21E /* ALAsset+Equal.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7B6EE1181E68DB0026E21E /* ALAsset+Equal.m */; };
 		D8C3092F1724F1880057B393 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C3092E1724F1880057B393 /* UIKit.framework */; };
 		D8C309311724F1880057B393 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C309301724F1880057B393 /* Foundation.framework */; };
 		D8C309331724F1880057B393 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C309321724F1880057B393 /* CoreGraphics.framework */; };
@@ -31,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB7B6EE0181E68DB0026E21E /* ALAsset+Equal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+Equal.h"; sourceTree = "<group>"; };
+		BB7B6EE1181E68DB0026E21E /* ALAsset+Equal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+Equal.m"; sourceTree = "<group>"; };
 		D8C3092B1724F1880057B393 /* MultiImagePickerWithQueue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiImagePickerWithQueue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C3092E1724F1880057B393 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D8C309301724F1880057B393 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -145,6 +148,8 @@
 				D8C309561724F1980057B393 /* NEAlbumPickerController.xib */,
 				D8C309571724F1980057B393 /* NEAsset.h */,
 				D8C309581724F1980057B393 /* NEAsset.m */,
+				BB7B6EE0181E68DB0026E21E /* ALAsset+Equal.h */,
+				BB7B6EE1181E68DB0026E21E /* ALAsset+Equal.m */,
 				D8C309591724F1980057B393 /* NEAssetCell.h */,
 				D8C3095A1724F1980057B393 /* NEAssetCell.m */,
 				D8C3095B1724F1980057B393 /* NEAssetPickerController.h */,
@@ -231,6 +236,7 @@
 				D8C309481724F1880057B393 /* ViewController.m in Sources */,
 				D8C309621724F1980057B393 /* NEAlbumPickerController.m in Sources */,
 				D8C309641724F1980057B393 /* NEAsset.m in Sources */,
+				BB7B6EE2181E68DB0026E21E /* ALAsset+Equal.m in Sources */,
 				D8C309651724F1980057B393 /* NEAssetCell.m in Sources */,
 				D8C309661724F1980057B393 /* NEAssetPickerController.m in Sources */,
 				D8C309681724F1980057B393 /* NEMultiImagePickerController.m in Sources */,
@@ -356,6 +362,7 @@
 				D8C309501724F1880057B393 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

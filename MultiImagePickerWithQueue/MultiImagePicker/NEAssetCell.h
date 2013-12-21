@@ -10,12 +10,8 @@
 
 
 @interface NEAssetCell : UITableViewCell
-{
-	NSArray *rowAssets;
-}
 
--(id)initWithAssets:(NSArray*)_assets reuseIdentifier:(NSString*)_identifier;
--(void)setAssets:(NSArray*)_assets;
+-(void)setAssets:(NSArray*)assets;
 
 @property (nonatomic,retain) NSArray *rowAssets;
 

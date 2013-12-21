@@ -11,9 +11,15 @@
 #import "NEMultiImagePickerController.h"
 #import "NEAssetPickerController.h"
 
+@interface NEAlbumPickerController ()
+
+@property (nonatomic, retain) NSMutableArray *chosenAssets;
+
+@end
+
 @implementation NEAlbumPickerController
 
-@synthesize parent, assetGroups;
+@synthesize parent, assetGroups, chosenAssets;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -27,6 +33,10 @@
 	[self.navigationItem setRightBarButtonItem:cancelButton];
 	[cancelButton release];
 
+    NSMutableArray *tmpAssets = [[NSMutableArray alloc] init];
+    self.chosenAssets = tmpAssets;
+    [tmpAssets release];
+    
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
 	self.assetGroups = tempArray;
     [tempArray release];
@@ -77,9 +87,16 @@
 	[self.navigationItem setTitle:@"选择相册"];
 }
 
--(void)selectedAssets:(NSArray*)_assets {
+-(void)selectedAssets {
+    
+    NSMutableArray *selectedAssetsImages = [[[NSMutableArray alloc] init] autorelease];
+    
+	for(NEAsset *asset in self.chosenAssets)
+    {
+        [selectedAssetsImages addObject:[asset asset]];
+	}
 	
-	[(NEMultiImagePickerController*)parent selectedAssets:_assets];
+	[(NEMultiImagePickerController*)parent selectedAssets:selectedAssetsImages];
 }
 
 #pragma mark -
@@ -129,6 +146,7 @@
 
     // Move me    
     picker.assetGroup = [assetGroups objectAtIndex:indexPath.row];
+    picker.chosenAssets = self.chosenAssets;
     [picker.assetGroup setAssetsFilter:[ALAssetsFilter allPhotos]];
     
 	[self.navigationController pushViewController:picker animated:YES];
@@ -160,6 +178,7 @@
 {	
     [assetGroups release];
     [library release];
+    [chosenAssets release];
     [super dealloc];
 }
 

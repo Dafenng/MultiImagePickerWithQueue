@@ -27,31 +27,30 @@
 
 	[self.photosTableView setSeparatorColor:[UIColor clearColor]];
 	[self.photosTableView setAllowsSelection:NO];
-
-    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    self.assets = tempArray;
-    [tempArray release];
-	
-    NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
-    self.chosenAssets = tmpArray;
-    [tmpArray release];
+    
+    NSMutableArray *tmpAssets = [[NSMutableArray alloc] init];
+    self.assets = tmpAssets;
+    [tmpAssets release];
     
 	UIBarButtonItem *doneButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)] autorelease];
 	[self.navigationItem setRightBarButtonItem:doneButtonItem];
 	[self.navigationItem setTitle:@"加载中..."];
-
-	[self performSelectorInBackground:@selector(preparePhotos) withObject:nil];
     
-    // Show partial while full list loads
-	[self.photosTableView performSelector:@selector(reloadData) withObject:nil afterDelay:.5];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self preparePhotos];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.photosTableView reloadData];
+            [self.chosenPhotoTableView reloadData];
+            [self.navigationItem setTitle:@"选取照片"];
+        });
+    });
+
 }
 
 -(void)preparePhotos {
     
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-	
-    //enumerating photos
     [self.assetGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) 
      {         
          if(result == nil) 
@@ -64,17 +63,43 @@
          [self.assets addObject:asset];
      }];
 	
-	[self.photosTableView reloadData];
-	[self.navigationItem setTitle:@"选取照片"];
+    NSMutableArray *tmpChosenAssets = [[NSMutableArray alloc] initWithArray:self.chosenAssets];
+    [tmpChosenAssets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NEAsset *chosenAsset = (NEAsset *)obj;
+        NSUInteger assetIndex = idx;
+        [self.assets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if ([chosenAsset isEqual:(NEAsset *)obj]) {
+                [self.chosenAssets replaceObjectAtIndex:assetIndex withObject:obj];
+                *stop = YES;
+            }
+        }];
+    }];
+    
+    [self.chosenAssets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [(NEAsset *)obj setParent:self];
+    }];
     
     [pool release];
+}
 
+- (BOOL)isAssetContained:(NEAsset *)asset
+{
+    __block BOOL contained = NO;
+    [self.chosenAssets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([(NEAsset *)obj isEqual:asset]) {
+            contained = YES;
+            *stop = YES;
+        }
+    }];
+    
+    return contained;
 }
 
 - (void)addAsset:(NEAsset *)asset
 {
-    if (![self.chosenAssets containsObject:asset]) {
+    if (![self isAssetContained:asset]) {
         [self.chosenAssets addObject:asset];
+//        [(NEAlbumPickerController *)self.parent addAsset:asset];
         [self.chosenPhotoTableView reloadData];
         NSIndexPath *ipath = [NSIndexPath indexPathForRow:[self.chosenAssets count] - 1 inSection:0];
         [self.chosenPhotoTableView scrollToRowAtIndexPath:ipath atScrollPosition: UITableViewScrollPositionTop animated:YES];
@@ -83,25 +108,16 @@
 
 - (void)removeAsset:(NEAsset *)asset
 {
-    if ([self.chosenAssets containsObject:asset]) {
+    if ([self isAssetContained:asset]) {
         [self.chosenAssets removeObject:asset];
+//        [(NEAlbumPickerController *)self.parent removeAsset:asset];
         [self.chosenPhotoTableView reloadData];
     }
 }
 
 - (void)doneAction:(id)sender {
 	
-	NSMutableArray *selectedAssetsImages = [[[NSMutableArray alloc] init] autorelease];
-	    
-	for(NEAsset *asset in self.assets)
-    {		
-		if([asset selected]) {
-			
-			[selectedAssetsImages addObject:[asset asset]];
-		}
-	}
-        
-    [(NEAlbumPickerController*)self.parent selectedAssets:selectedAssetsImages];
+    [(NEAlbumPickerController*)self.parent selectedAssets];
 }
 
 #pragma mark UITableViewDataSource Delegate Methods
@@ -119,16 +135,17 @@
             break;
         case ChosenPhotoTableViewTag:
             return [self.chosenAssets count];
+            break;
         default:
             break;
     }
     return 0;
 }
 
-- (NSArray*)assetsForIndexPath:(NSIndexPath*)_indexPath {
+- (NSArray*)assetsForIndexPath:(NSIndexPath*)indexPath {
     
-	int index = (_indexPath.row*4);
-	int maxIndex = (_indexPath.row*4+3);
+	int index = (indexPath.row*4);
+	int maxIndex = (indexPath.row*4+3);
     
 	if(maxIndex < [self.assets count]) {
         
@@ -162,7 +179,6 @@
 	return nil;
 }
 
-// Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (tableView.tag) {
         case PhotoTableViewTag:
@@ -173,12 +189,9 @@
             
             if (cell == nil)
             {
-                cell = [[[NEAssetCell alloc] initWithAssets:[self assetsForIndexPath:indexPath] reuseIdentifier:CellIdentifier] autorelease];
+                cell = [[[NEAssetCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
-            else
-            {
-                [cell setAssets:[self assetsForIndexPath:indexPath]];
-            }
+            [cell setAssets:[self assetsForIndexPath:indexPath]];
             
             return cell;
         }
@@ -191,19 +204,24 @@
                 cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             }
             NEAsset *selectedAsset = (NEAsset *)[self.chosenAssets objectAtIndex:indexPath.row];
+            selectedAsset.selected = YES;
+            
             NEAsset *asset = [[NEAsset alloc] initWithAsset:[selectedAsset asset]];
             asset.frame = CGRectMake(6, 6, 72, 72);
             asset.transform = CGAffineTransformMakeRotation(M_PI/2);
             [cell.contentView addSubview:asset];
             [asset release];
+            
             UIImageView *overlayView = [[UIImageView alloc] initWithFrame:CGRectMake(60, 60, 24, 24)];
             [overlayView setImage:[UIImage imageNamed:@"multiimage_delete.png"]];
             overlayView.transform = CGAffineTransformMakeRotation(M_PI/2);
             [cell.contentView addSubview:overlayView];
             [overlayView release];
+            
             [cell addGestureRecognizer:[[[UITapGestureRecognizer alloc] initWithTarget:selectedAsset action:@selector(toggleDeselection)] autorelease]];
             return cell;
         }
+            break;
         default:
             break;
     }
@@ -218,6 +236,7 @@
             break;
         case ChosenPhotoTableViewTag:
             return 84;
+            break;
         default:
             break;
     }
